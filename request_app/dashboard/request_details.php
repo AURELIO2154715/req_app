@@ -4,11 +4,15 @@ include '../shared/connection.php';
 
 $user_type = $_SESSION['user_type'];
 $request_id = $_GET['request_id'];
+
 $request = "SELECT * FROM request_form where request_id='$request_id'";
 $requestQuery = mysqli_query($conn,$request) or die(mysqli_error($conn));
-
-
 $req = mysqli_fetch_array($requestQuery, MYSQLI_ASSOC);
+
+$reqid = $req['requested_by'];
+$nameStr = "SELECT firstname,middlename,lastname from user_details where id='$reqid'"; 
+$nameQry = mysqli_query($conn,$nameStr) or die(mysqli_error($conn)); 
+$nameArr = mysqli_fetch_array($nameQry,MYSQLI_ASSOC); 
 
 $items = "SELECT * FROM items WHERE request_form_id = '$request_id'";
 $itemsQuery = mysqli_query($conn,$items);
@@ -36,7 +40,7 @@ $itemsQuery = mysqli_query($conn,$items);
 			  }
 		    ?>
 		</table>
-		<h3>Requested By: <?php echo $req['requested_by'];?></h3>
+		<h3>Requested By: <?php echo $nameArr['firstname'] . " " . $nameArr['middlename'] . " " . $nameArr['lastname'];?></h3>
 		<h3>Use of Item(s): <?php echo $req['use_of_item'];?></h3>
 		<h3>Needed on: <?php echo $req['date_needed'];?></h3>
 		<?php
