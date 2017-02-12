@@ -15,6 +15,7 @@ $user_disabledQ = mysqli_query($conn,$user_disabled) or die(mysqli_error($conn))
 
     </head>
     <body>
+        <a href="../shared/logout.php" style="float:right">Logout</a>
         <h1>Activate Accounts</h1>
         <a href="home.php">Back to Home</a>
         <div>
@@ -38,21 +39,6 @@ $user_disabledQ = mysqli_query($conn,$user_disabled) or die(mysqli_error($conn))
                 echo "<td>" . $user['name'] . "</td>";
                 echo "<td>" . $user['user_status'] . "</td>";
                 echo "<td>" . $user['created_at'] . "</td></tr>";
-                // if($user['user_status'] == 'active'){ 
-                //     echo "<td>eyo</td></tr>";
-                //     // echo "<td><input type='button' onclick='Disable()' value='Disable'></td></tr>";
-                //     // $wew = "UPDATE user SET user_status='active' WHERE id='$user['id']'";
-                //     // $wewQ = mysqli_query($conn,$wew);
-
-                // }else if($user['user_status'] =='disabled'){
-                //     echo "<td>disable</td></tr>";
-                //          // echo "<meta http-equiv='refresh' content='0'>";
-                    
-                // }
-
-                    // echo "<td><input type='checkbox' name='active' value='active'>Activate<br></td></tr>";
-                    // $wew1 = "UPDATE user SET user_status='disable' WHERE id='$user['id']'";
-                    // $wewQ1 = mysqli_query($conn,$wew);
                 
                }
               ?>
@@ -68,23 +54,46 @@ $user_disabledQ = mysqli_query($conn,$user_disabled) or die(mysqli_error($conn))
 
         if(isset($_POST['active'])){
             $username = $_POST['user'];
-            $wew = "UPDATE users SET user_status='active' WHERE username='$username'";
-            $wewQ = mysqli_query($conn,$wew);
-            echo "success";
-            echo "<meta http-equiv='refresh' content='0'>";
+            //chcker
+            $checkStr = "SELECT username FROM users WHERE username='$username'";
+            $checkQ = mysqli_query($conn,$checkStr);
+            $checkRow = mysqli_num_rows($checkQ);
+            if($checkRow > 0){
+                $wew = "UPDATE users SET user_status='active' WHERE username='$username'";
+                $wewQ = mysqli_query($conn,$wew);
+                echo "<meta http-equiv='refresh' content='0'>";
+                header("Location: activator.php?success=success");
+            }else{
+                echo "Username not found!";
+            }
 
         }
         if(isset($_POST['disabled'])){
             $username = $_POST['user'];
-            $wew = "UPDATE users SET user_status='disabled' WHERE username='$username'";
-            $wewQ = mysqli_query($conn,$wew);
-            echo "<meta http-equiv='refresh' content='0'>";
+            //chcker
+            $checkStr = "SELECT username FROM users WHERE username='$username'";
+            $checkQ = mysqli_query($conn,$checkStr);
+            $checkRow = mysqli_num_rows($checkQ);
+            if($checkRow > 0){
+                $wew = "UPDATE users SET user_status='disabled' WHERE username='$username'";
+                $wewQ = mysqli_query($conn,$wew);
+                echo "<meta http-equiv='refresh' content='0'>";
+                header("Location: activator.php?nope=nope");
+            }else{
+                echo "Username not found!";
+            }
         }
-
-
-
+        
         ?>
-                
+
+        <?php
+        if(isset($_GET['success']) && $_GET['success'] == 'success'){
+            echo "Successfully Activated Username!";
+        }
+        if(isset($_GET['nope']) && $_GET['nope'] == 'nope'){
+            echo "Successfully Disabled Username!";
+        }
+        ?>   
               
 
     </body>

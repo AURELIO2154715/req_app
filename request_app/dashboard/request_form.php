@@ -43,6 +43,7 @@ if(isset($_POST['addrequest'])){
 	<title>Request Form</title>
 </head>
 <body>
+	<a href="../shared/logout.php" style="float:right">Logout</a>
 	<div>
 		<h1>Request Form</h1>
 		<a href="home.php">Back to Home</a>

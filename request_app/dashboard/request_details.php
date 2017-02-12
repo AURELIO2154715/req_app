@@ -25,6 +25,7 @@ $itemsQuery = mysqli_query($conn,$items);
 	<title>Request Details</title>
 </head>
 <body>
+	<a href="../shared/logout.php" style="float:right">Logout</a>
 	<div>
 		<h1>Request Form Details</h1>
 		<a href="home.php">Back to List</a>	
