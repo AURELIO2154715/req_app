@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 07, 2017 at 02:40 PM
+-- Generation Time: Feb 12, 2017 at 06:23 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -40,20 +40,7 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`id`, `quantity`, `description`, `request_form_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 'alcohol', 1, '2017-02-05 10:53:38', '2017-02-05 10:53:38'),
-(2, 2, 'paper', 1, '2017-02-05 10:53:38', '2017-02-05 10:53:38'),
-(3, 3, 'ballpen', 1, '2017-02-05 10:53:38', '2017-02-05 10:53:38'),
-(4, 3, 'chairs', 2, '2017-02-05 10:55:45', '2017-02-05 10:55:45'),
-(5, 5, 'Tables', 2, '2017-02-05 10:55:45', '2017-02-05 10:55:45'),
-(6, 1, 'adobo', 3, '2017-02-05 11:37:20', '2017-02-05 11:37:20'),
-(7, 3, 'tinola', 3, '2017-02-05 11:37:20', '2017-02-05 11:37:20'),
-(8, 4, 'lechon', 3, '2017-02-05 11:37:20', '2017-02-05 11:37:20'),
-(9, 4, 'papel', 4, '2017-02-06 08:24:01', '2017-02-06 08:24:01'),
-(10, 3, 'bolpen', 4, '2017-02-06 08:24:01', '2017-02-06 08:24:01'),
-(11, 4, 'wala lang', 5, '2017-02-07 08:17:02', '2017-02-07 08:17:02'),
-(12, 2131231, 'wew', 6, '2017-02-07 08:22:11', '2017-02-07 08:22:11'),
-(13, 22, 'wewewew', 6, '2017-02-07 08:22:11', '2017-02-07 08:22:11'),
-(14, 3, 'yyyyy', 6, '2017-02-07 08:22:11', '2017-02-07 08:22:11');
+(1, 3, 'toyota corolla', 1, '2017-02-09 09:30:39', '2017-02-09 09:30:39');
 
 -- --------------------------------------------------------
 
@@ -76,12 +63,7 @@ CREATE TABLE `request_form` (
 --
 
 INSERT INTO `request_form` (`request_id`, `requested_by`, `request_status`, `use_of_item`, `date_needed`, `created_at`, `updated_at`) VALUES
-(1, 1, 'pending', 'For Examination', '2017-02-13 16:00:00', '2017-02-05 10:53:38', '2017-02-05 10:53:38'),
-(2, 1, 'pending', 'Classroom', '2017-02-21 16:00:00', '2017-02-05 10:55:45', '2017-02-05 10:55:45'),
-(3, 1, 'pending', 'Lunch', '2017-02-09 16:00:00', '2017-02-05 11:37:20', '2017-02-05 11:37:20'),
-(4, 1, 'pending', 'sdasdasdasdasdas', '2017-02-24 16:00:00', '2017-02-06 08:24:01', '2017-02-06 08:24:01'),
-(5, 1, 'pending', 'heeeeeeeeeeeeeeeeeeeeeeeyyy', '2017-02-24 16:00:00', '2017-02-07 08:17:02', '2017-02-07 08:17:02'),
-(6, 3, 'pending', 'wala lang bto', '2017-02-07 16:00:00', '2017-02-07 08:22:11', '2017-02-07 08:22:11');
+(1, 1, 'pending', 'transportation', '2017-02-09 16:00:00', '2017-02-09 09:30:39', '2017-02-09 09:30:39');
 
 -- --------------------------------------------------------
 
@@ -113,16 +95,18 @@ CREATE TABLE `users` (
   `user_status` varchar(255) NOT NULL COMMENT 'active/disabled',
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `user_type`, `user_status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', '$2y$10$z.ucDvW0WeS64VCU.bHeR.O/bL6.Lifiz13jtCO9B3ui5x2rCadzy', 'scis', 'active', '2017-02-06 11:36:10', '2017-02-06 11:36:10'),
-(2, 'accounting', '$2y$10$3Gi.7VB00mB9Vqaz1wiCheE1MKthfJXaE/yk5.bWZsfL2PHPzIHeK', 'accounting', 'active', '2017-02-06 11:36:29', '2017-02-06 11:36:29'),
-(3, 'testing', '$2y$10$QjCwEyzoM81/T5TQAvPj0.Jk2fNR8JN8k13RQ0xGamW.HVyyOrzG6', 'scis', 'active', '2017-02-07 08:21:19', '2017-02-07 08:21:19');
+(1, 'admin', '$2y$10$/lfdJjl.CyQ0TWeleHxYhusT0zYX2wfvjbXbiwqTD.zmn34xacq1m', 'scis', 'active', '2017-02-09 08:37:50', '2017-02-09 08:37:50'),
+(3, 'janlorenz', '$2y$10$9aEKYU5Ry1AtStAAvNKVaOSK3GFgAnt3eA2wSzdlccvMEtAbkrbBe', 'scis', 'disabled', '2017-02-09 08:38:19', '2017-02-09 08:38:19'),
+(4, 'clint', '$2y$10$eqH.xpRgAc8IQEx/pcj.Bu3/BqBxNjIc2GQkhnN726zEFOGs13O4a', 'scis', 'disabled', '2017-02-09 08:38:37', '2017-02-09 08:38:37'),
+(5, 'miguel', '$2y$10$lkjFosjlqMQQfE94coD.Z.JchLWCfXgOqsr6kUJI7Z8n8cBeCYcbC', 'scis', 'disabled', '2017-02-09 08:39:04', '2017-02-09 08:39:04'),
+(6, 'accounting', '$2y$10$9CEIIolUC8FXbeGSPHNzA.9DTvT1N0sStZt46wol5LNuZDbAxS6zG', 'accounting', 'active', '2017-02-09 09:41:21', '2017-02-09 09:41:21');
 
 -- --------------------------------------------------------
 
@@ -138,16 +122,18 @@ CREATE TABLE `user_details` (
   `lastname` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user_details`
 --
 
 INSERT INTO `user_details` (`id`, `user_id`, `firstname`, `middlename`, `lastname`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Galo Berlyn', 'Dullas', 'Garlejo', '2017-02-06 11:36:10', '2017-02-06 11:36:10'),
-(2, 2, 'Accounting', '', '', '2017-02-06 11:36:29', '2017-02-06 11:36:29'),
-(3, 3, 'Galo Other', 'Request', '', '2017-02-07 08:21:19', '2017-02-07 08:21:19');
+(1, 1, 'Galo Berlyn', 'Dulas', 'Garlejo', '2017-02-09 08:37:50', '2017-02-09 08:37:50'),
+(3, 3, 'Jan Lorenz', 'Bekkel', 'Aurelio', '2017-02-09 08:38:19', '2017-02-09 08:38:19'),
+(4, 4, 'Clint Deric', 'Famorac', 'Dalayoan', '2017-02-09 08:38:37', '2017-02-09 08:38:37'),
+(5, 5, 'Juan Miguel', 'Bangiacan', 'Delos Santos', '2017-02-09 08:39:05', '2017-02-09 08:39:05'),
+(6, 6, 'Ed', 'B', 'Kidayan', '2017-02-09 09:41:21', '2017-02-09 09:41:21');
 
 --
 -- Indexes for dumped tables
@@ -181,7 +167,8 @@ ALTER TABLE `users`
 -- Indexes for table `user_details`
 --
 ALTER TABLE `user_details`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -191,12 +178,12 @@ ALTER TABLE `user_details`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `request_form`
 --
 ALTER TABLE `request_form`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `status_report`
 --
@@ -206,12 +193,22 @@ ALTER TABLE `status_report`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `user_details`
 --
 ALTER TABLE `user_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `user_details`
+--
+ALTER TABLE `user_details`
+  ADD CONSTRAINT `user_details_user_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
