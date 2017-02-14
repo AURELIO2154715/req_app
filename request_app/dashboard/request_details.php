@@ -48,6 +48,7 @@ $itemsQuery = mysqli_query($conn,$items);
 		if($user_type == 'accounting'){
  		echo "<button onclick='approve()'>Approve</button>";
 		echo "<button onclick='reject()'>Reject</button>";
+		//IF APPROVED, QUERY TO DB THE STATUS THEN REMOVE THE BUTTONS AND QUERY THE REMARKS AND UPLOAD
 		}	
 		?>
 	</div>
@@ -55,11 +56,11 @@ $itemsQuery = mysqli_query($conn,$items);
 <script type="text/javascript">
 	function reject(){
 		console.log('will reject');
-		window.location.href='../shared/status_report.php';
+		alert('are you sure you want to Reject?');
 	}
 	function approve(){
 		console.log('approve');
-		window.location.href='../shared/status_report.php';
+		alert('are you sure you want to Approve?');
 	}
 </script>
 </html>

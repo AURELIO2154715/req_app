@@ -3,7 +3,7 @@ session_start();
 if(isset($_SESSION['user_id'])){
 	header('Location: dashboard/home.php');
 }
-include 'shared/auth.php';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,6 +18,7 @@ include 'shared/auth.php';
 			Password: <input type="password" name="password"><br>
 			<input type="submit" name="login" value="Login">
 		</form>
-	</div>
+	</div><br><br>
+	<?php include 'shared/auth.php';?>
 </body>
 </html>

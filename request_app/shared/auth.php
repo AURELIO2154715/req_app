@@ -19,6 +19,8 @@
 					//redirect to dashboard
 					header("location: dashboard/home.php");
 				}
+			}else{
+				echo "Wrong Credentials, please try again";
 			}
 
 		}else{

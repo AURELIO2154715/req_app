@@ -10,6 +10,9 @@ $user_disabledQ = mysqli_query($conn,$user_disabled) or die(mysqli_error($conn))
 
 <!DOCTYPE html>
 <html>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../assets/main.css"/>
     <head>
         <title>Activate Account</title>
 
@@ -91,12 +94,10 @@ $user_disabledQ = mysqli_query($conn,$user_disabled) or die(mysqli_error($conn))
             echo "Successfully Activated Username!";
         }
         if(isset($_GET['nope']) && $_GET['nope'] == 'nope'){
-            echo "Successfully Disabled Username!";
+            echo "<div class='mess'><p>Successfully Disabled Username!</p></div>";
         }
         ?>   
               
 
     </body>
-<script>
-</script>
 </html
