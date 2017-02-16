@@ -30,6 +30,7 @@ $requestQuery = mysqli_query($conn,$requests) or die(mysqli_error($conn));
 <body>
  	<div>
  		<a href="../shared/logout.php" style="float:right">Logout</a>
+ 		<a href="../dashboard/profile.php" style="float:right">Profile  |</a>
  		<h1>Hi <?php echo $firstname . ' ' . $middlename . ' ' . $lastname?>!</h1>
  		<div>
  		<!-- check if user iis scis or not -->

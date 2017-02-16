@@ -46,21 +46,36 @@ $itemsQuery = mysqli_query($conn,$items);
 		<h3>Needed on: <?php echo $req['date_needed'];?></h3>
 		<?php
 		if($user_type == 'accounting'){
- 		echo "<button onclick='approve()'>Approve</button>";
-		echo "<button onclick='reject()'>Reject</button>";
+		echo "<span id='buttons'>";
+ 		echo "<button onclick='confirmation()'>Approve</button>";
+		echo "<button onclick='confirmation()'>Reject</button>";
+		echo "</span>";
 		//IF APPROVED, QUERY TO DB THE STATUS THEN REMOVE THE BUTTONS AND QUERY THE REMARKS AND UPLOAD
 		}	
 		?>
 	</div>
 </body>
 <script type="text/javascript">
-	function reject(){
-		console.log('will reject');
-		alert('are you sure you want to Reject?');
+function confirmation(){
+		var x = confirm('Are you sure?');
+		console.log(x);
+	if(x){
+		if (window.XMLHttpRequest) {
+			// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+			  } else {
+			// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			  }
+			xmlhttp.onreadystatechange=function() {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)  {
+			    document.getElementById("buttons").innerHTML=xmlhttp.responseText;
+			    }
+			  }
+			xmlhttp.open("GET","../accounting/approved_request.php",true);
+			xmlhttp.send();
 	}
-	function approve(){
-		console.log('approve');
-		alert('are you sure you want to Approve?');
-	}
+}
+
 </script>
 </html>

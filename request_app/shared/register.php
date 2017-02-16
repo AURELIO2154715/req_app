@@ -8,7 +8,8 @@
 	if (isset($_POST['username'])){
 	include 'connection.php';
 		$username = $_POST['username'];
-		$password = password_hash($_POST['password'],PASSWORD_DEFAULT);
+		$password = $_POST['password'];
+        $cpassword = $_POST['cpassword'];
 		$usertype = $_POST['user_type'];
 		$firstname = $_POST['firstname'];
 		$middlename = $_POST['middlename'];
@@ -29,21 +30,25 @@
 			echo "Error: " . $check . mysqli_error($conn);
 		}
 
-
-		$usersQuery = "INSERT INTO users (username,password,user_type,user_status,created_at,updated_at) VALUES ('$username','$password','$usertype','$status',now(),now())";
-		if(mysqli_query($conn, $usersQuery)){
-			$user_id = mysqli_insert_id($conn);
-			$userDetailsQuery = "INSERT INTO user_details (user_id,firstname,middlename,lastname,created_at,updated_at) VALUES ($user_id,'$firstname','$middlename','$lastname',now(),now())";
-			if(mysqli_query($conn,$userDetailsQuery)){
-				header("location: ../index.php");
-			}else{
-				echo "Error " . $userDetailsQuery . mysqli_error($conn);
-			}
-		}else{
-			echo "Error " . $usersQuery . mysqli_error($conn);
-		}
-		
-	
+        if($password == $cpassword){
+            
+            $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
+            $usersQuery = "INSERT INTO users (username,password,user_type,user_status,created_at,updated_at) VALUES ('$username','$password','$usertype','$status',now(),now())";
+            if(mysqli_query($conn, $usersQuery)){
+                $user_id = mysqli_insert_id($conn);
+                $userDetailsQuery = "INSERT INTO user_details (user_id,firstname,middlename,lastname,created_at,updated_at) VALUES ($user_id,'$firstname','$middlename','$lastname',now(),now())";
+                if(mysqli_query($conn,$userDetailsQuery)){
+                    header("location: ../index.php");
+                }else{
+                    echo "Error " . $userDetailsQuery . mysqli_error($conn);
+                }
+            }else{
+                echo "Error " . $usersQuery . mysqli_error($conn);
+            }
+            
+        }else{
+            echo "Password doesn't match!";
+        }
 	}
 
 ?>
@@ -56,6 +61,7 @@
 		<form method="POST" action="register.php">
 			Username: <input type="text" name="username"><br>
 			Password: <input type="password" name="password"><br>
+            Confirm Password: <input type="password" name="cpassword"><br>
 			User Type:
 			<select name="user_type">
 				<option value="scis">SCIS</option>	
