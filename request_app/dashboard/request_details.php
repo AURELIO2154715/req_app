@@ -16,7 +16,7 @@ $nameArr = mysqli_fetch_array($nameQry,MYSQLI_ASSOC); //
 
 $items = "SELECT * FROM items WHERE request_form_id = '$request_id'";
 $itemsQuery = mysqli_query($conn,$items);
-
+	
 
 ?>
 <!DOCTYPE html>
@@ -45,11 +45,14 @@ $itemsQuery = mysqli_query($conn,$items);
 		<h3>Use of Item(s): <?php echo $req['use_of_item'];?></h3>
 		<h3>Needed on: <?php echo $req['date_needed'];?></h3>
 		<?php
+		$statusSTR = "SELECT * FROM request_form";
+		$statusQRY = mysqli_query($conn,$statusSTR);
+		$statusarr = mysqli_fetch_array($statusQRY, MYSQLI_ASSOC);
 		if($user_type == 'accounting'){
-		echo "<span id='buttons'>";
- 		echo "<button onclick='confirmation()'>Approve</button>";
-		echo "<button onclick='confirmation()'>Reject</button>";
-		echo "</span>";
+			echo "<span id='buttons'>"; 
+		 	echo "<button onclick='confirmation()'>Approve</button>";
+			echo "<button onclick='confirmation()'>Reject</button>";
+			echo "</span>";
 		//IF APPROVED, QUERY TO DB THE STATUS THEN REMOVE THE BUTTONS AND QUERY THE REMARKS AND UPLOAD
 		}	
 		?>
