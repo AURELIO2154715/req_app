@@ -1,6 +1,6 @@
 <?php
 $file = basename($_GET['file']);
-$file = '../uploads/'.$file;
+$fileDirectory = '../uploads/'.$file;
 
 if(!$fileDirectory){ // file does not exist
     die('file not found');
