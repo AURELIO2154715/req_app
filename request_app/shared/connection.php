@@ -1,5 +1,5 @@
 <?php
-	$conn = mysqli_connect("localhost", "root", "","scis_req_db");
+	$conn = mysqli_connect("localhost", "root", "newpass","scis_req_db");
 
 	if (mysqli_connect_errno())
   	{

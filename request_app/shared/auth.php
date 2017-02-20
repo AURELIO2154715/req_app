@@ -15,9 +15,8 @@
 					session_start();
 					$_SESSION['user_id'] = $row['id'];
 					$_SESSION['user_type'] = $row['user_type'];
-					
 					//redirect to dashboard
-					header("location: dashboard/home.php");
+					header("Location: dashboard/home.php");
 				}
 			}else{
 				echo "Wrong Credentials, please try again";
@@ -42,5 +41,4 @@
 		// }
 	
 	}
-
 ?>

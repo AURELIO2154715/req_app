@@ -31,6 +31,7 @@ $requestQuery = mysqli_query($conn,$requests) or die(mysqli_error($conn));
  	<div>
  		<a href="../shared/logout.php" style="float:right">Logout</a>
  		<a href="../dashboard/profile.php" style="float:right">Profile  |</a>
+
  		<h1>Hi <?php echo $firstname . ' ' . $middlename . ' ' . $lastname?>!</h1>
  		<div>
  		<!-- check if user iis scis or not -->
@@ -38,6 +39,8 @@ $requestQuery = mysqli_query($conn,$requests) or die(mysqli_error($conn));
  		if($user_type=='scis'){
  			echo "<a href='request_form.php'>Add New Request</a>";
 
+ 		}else{
+ 			echo "<a href='../accounting/approved.php'> Approved Requests </a>";
  		}
 
  		?>
@@ -64,7 +67,12 @@ $requestQuery = mysqli_query($conn,$requests) or die(mysqli_error($conn));
 			  	echo "<td>" . $row['use_of_item'] . "</td>";
 			  	echo "<td>" . $row['request_status'] . "</td>";
 			  	echo "<td>" . $row['date_needed'] . "</td>";
-			  	echo "<td><a href='request_details.php?request_id=" . $row['request_id'] . "'>View Details</a></td></tr>";
+			  	echo "<td>";
+			  	echo "<a href='request_details.php?request_id=" . $row['request_id'] . "'>View Details</a> ";
+			  	if($row['request_status'] != 'pending'){
+			  		echo "<a href='status_report.php?request_id=" . $row['request_id'] . "'>View Status Report</a>";
+			  	}
+			  	echo "</td></tr>";
 			  }
 
 
@@ -73,6 +81,7 @@ $requestQuery = mysqli_query($conn,$requests) or die(mysqli_error($conn));
 			
  		</div> 		
  	</div>
+ 	
 </body>
 </html>
 
