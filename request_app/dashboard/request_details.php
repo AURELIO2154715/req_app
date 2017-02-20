@@ -16,7 +16,7 @@ $req = mysqli_fetch_array($requestQuery, MYSQLI_ASSOC);
 
 $items = "SELECT * FROM items WHERE request_form_id = '$request_id'";
 $itemsQuery = mysqli_query($conn,$items);
-
+	
 
 ?>
 <!DOCTYPE html>
@@ -45,37 +45,16 @@ $itemsQuery = mysqli_query($conn,$items);
 		<h3>Use of Item(s): <?php echo $req['use_of_item'];?></h3>
 		<h3>Needed on: <?php echo $req['date_needed'];?></h3>
 		<?php
+		$statusSTR = "SELECT * FROM request_form";
+		$statusQRY = mysqli_query($conn,$statusSTR);
+		$statusarr = mysqli_fetch_array($statusQRY, MYSQLI_ASSOC);
 		if($user_type == 'accounting'){
-		echo "<span id='buttons'>";
- 		echo "<a href='../accounting/request_status.php?request_id=" .$request_id. "&&status=approve'>Approve</a> | ";
-		echo "<a href='../accounting/request_status.php?request_id=" .$request_id. "&&status=reject'>Reject</a>";
-		echo "</span>";
-		//IF APPROVED, QUERY TO DB THE STATUS THEN REMOVE THE BUTTONS AND QUERY THE REMARKS AND UPLOAD
+			echo "<span id='buttons'>";
+	 		echo "<a href='../accounting/request_status.php?request_id=" .$request_id. "&&status=approve'>Approve</a> | ";
+			echo "<a href='../accounting/request_status.php?request_id=" .$request_id. "&&status=reject'>Reject</a>";
+			echo "</span>";
 		}	
 		?>
 	</div>
 </body>
-<script type="text/javascript">
-function confirmation(){
-		var x = confirm('Are you sure?');
-		console.log(x);
-	if(x){
-		if (window.XMLHttpRequest) {
-			// code for IE7+, Firefox, Chrome, Opera, Safari
-			  xmlhttp=new XMLHttpRequest();
-			  } else {
-			// code for IE6, IE5
-			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-			  }
-			xmlhttp.onreadystatechange=function() {
-			  if (xmlhttp.readyState==4 && xmlhttp.status==200)  {
-			    document.getElementById("buttons").innerHTML=xmlhttp.responseText;
-			    }
-			  }
-			xmlhttp.open("GET","../accounting/approved_request.php",true);
-			xmlhttp.send();
-	}
-}
-
-</script>
 </html>

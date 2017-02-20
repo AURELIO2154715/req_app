@@ -50,6 +50,7 @@
 			  	echo "<td><a href='request_details.php?request_id=" . $log['request_id'] . "'>View Details</a></td></tr>"; 
             }
         ?>
+        </table>
         
     </body>
 </html>
