@@ -20,47 +20,57 @@ if(isset($_POST['goBtn'])){
 		$newfilename = round(microtime(true)) . '.' . end($temp);
 		$target_file = $target_dir . $newfilename;
 		$uploadOk = 1;
-		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-		//allow certain file formats
-	// if(!isset($_FILES['doc'])){
-		// if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-		// 	&& $imageFileType != "gif" ) {
-		// 	    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-		// 	    $uploadOk = 0;
-		// }
-	// }
 
-
+		//CHECK KUNG HINDI EMPTY, CHECK MO YUNG FORMAT. PAG EMPTY NAMNAN BOLSHET SKIP NA
+		if(!empty($FILES_['doc']['name'])){
+				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+				//allow certain file formats
+				if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+					&& $imageFileType != "gif" ) {
+					    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+					    $uploadOk = 0;
+				}
+		}
 		// Check if $uploadOk is set to 0 by an error
 		if ($uploadOk == 0) {
 		    echo "Sorry, your file was not uploaded.";
 		// if everything is ok, try to upload file
 		} else {
-		    if (move_uploaded_file($_FILES["doc"]["tmp_name"], $target_file)) {
-		    	//save data on database
-		    	//query on status report
-		    // ======================added if statement
-		    if(isset($newfilename)){
-		    	$status_report_query = "INSERT INTO status_report (received_by,request_form_id,remarks,filename,created_at,updated_at) VALUES ($user_id,$request_id,'$reason','$newfilename',now(),now())";
-		    }else{
-		    	$status_report_query = "INSERT INTO status_report (received_by,request_form_id,remarks,filename,created_at,updated_at) VALUES ($user_id,$request_id,'$reason','NULL',now(),now())";
-		    }
-		    // ======================added if statement
-		    	if(mysqli_query($conn, $status_report_query)){
-		    		//if success update status on request form table
-		    		$updateRequest = "UPDATE request_form SET request_status='approved' WHERE request_id=$request_id";
-		    		if(mysqli_query($conn,$updateRequest)){
-		    			header('Location: ../dashboard/home.php');
-		    		}else{
-		    			echo "Error " . $updateRequest . mysqli_error($conn);
-		    		}
-		    	}else{
-		    		echo "Error " . $status_report_query . mysqli_error($conn);
-		    	}
-		        echo "The file ". basename( $_FILES["doc"]["name"]). " has been uploaded.";
-		    } else {
-		        echo "Sorry, there was an error uploading your file.";
-		    }
+			//ifempty query only set to null
+			if(empty($_FILES['doc']['name'])){
+			    $status_report_query = "INSERT INTO status_report (received_by,request_form_id,remarks,filename,created_at,updated_at) VALUES ($user_id,$request_id,'$reason','NULL',now(),now())";
+			    if(mysqli_query($conn, $status_report_query)){
+			    		//if success update status on request form table
+			    		$updateRequest = "UPDATE request_form SET request_status='approved' WHERE request_id=$request_id";
+			    		if(mysqli_query($conn,$updateRequest)){
+			    			header('Location: ../dashboard/home.php');
+			    		}else{
+			    			echo "Error " . $updateRequest . mysqli_error($conn);
+			    		}
+			    	}else{
+			    		echo "Error " . $status_report_query . mysqli_error($conn);
+			    	}
+			}else{//if not empty upload
+				if (move_uploaded_file($_FILES["doc"]["tmp_name"], $target_file)) {
+			    	//save data on database
+			    	//query on status report
+			    	$status_report_query = "INSERT INTO status_report (received_by,request_form_id,remarks,filename,created_at,updated_at) VALUES ($user_id,$request_id,'$reason','$newfilename',now(),now())";
+			    	if(mysqli_query($conn, $status_report_query)){
+			    		//if success update status on request form table
+			    		$updateRequest = "UPDATE request_form SET request_status='approved' WHERE request_id=$request_id";
+			    		if(mysqli_query($conn,$updateRequest)){
+			    			header('Location: ../dashboard/home.php');
+			    		}else{
+			    			echo "Error " . $updateRequest . mysqli_error($conn);
+			    		}
+			    	}else{
+			    		echo "Error " . $status_report_query . mysqli_error($conn);
+			    	}
+			        echo "The file ". basename( $_FILES["doc"]["name"]). " has been uploaded.";
+			    } else {
+			        echo "Sorry, there was an error uploading your file.";
+			    }
+			}
 		}
 	}else{
 		//if reject
