@@ -13,7 +13,7 @@
             
             $requests = "SELECT * FROM request_form WHERE requested_by = '$user_id' ORDER BY created_at DESC"; 
         
-            $req_accounting = "SELECT request_id, received_by, request_status, use_of_item, date_needed,request_form.created_at FROM request_form INNER JOIN status_report ON request_form_id = requested_by WHERE received_by = '6'"; 
+            $req_accounting = "SELECT request_id, received_by, request_status, use_of_item, date_needed,request_form.created_at FROM request_form INNER JOIN status_report ON request_form_id = requested_by WHERE received_by = '6' group by 1"; 
             
             $request_accountingQuery = mysqli_query($conn,$req_accounting) or die(mysqli_error($conn));
         
@@ -48,7 +48,7 @@
                     echo "<td>" . $log['use_of_item'] . "</td>";
                     echo "<td>" . $log['request_status'] . "</td>";
                     echo "<td>" . $log['date_needed'] . "</td>";
-                    echo "< td><a href='request_details.php?request_id=" . $log['request_id'] . "'>View Details</a></td></tr>"; 
+                    echo "<td><a href='request_details.php?request_id=" . $log['request_id'] . "'>View Details</a></td></tr>"; 
                 }
                 
             } else {
