@@ -74,37 +74,72 @@ $requestQuery = mysqli_query($conn,$requests) or die(mysqli_error($conn));
 			  </tr>
 
 			<?php
-			if (isset($_POST['sub_search'])) {
-				$request_search = "SELECT * from request_form where request_id like '%".$search. "%' or use_of_item like '%".$search. "%' ";
-				$request_searchQ = mysqli_query($conn,$request_search) or die(mysqli_error($conn));
-            	while($searchrow = mysqli_fetch_array($request_searchQ)){
-					echo "<tr><td> RF 00" . $searchrow['request_id'] . "</td>";
-					echo "<td>" . $searchrow['use_of_item'] . "</td>";
-					echo "<td>" . $searchrow['request_status'] . "</td>";
-					echo "<td>" . $searchrow['date_needed'] . "</td>";
-					echo "<td>";
-					echo "<a href='request_details.php?request_id=" . $searchrow['request_id'] . "'>View Details</a> ";
-					if($searchrow['request_status'] != 'pending'){
-						echo "<a href='status_report.php?request_id=" . $searchrow['request_id'] . "'>View Status Report</a>";
+			if($user_type == "scis"){
+				if (isset($_POST['sub_search'])) {
+					$request_search = "SELECT * from request_form where request_id like '%".$search. "%' or use_of_item like '%".$search. "%' ";
+					$request_searchQ = mysqli_query($conn,$request_search) or die(mysqli_error($conn));
+	            	while($searchrow = mysqli_fetch_array($request_searchQ)){
+						echo "<tr><td> RF 00" . $searchrow['request_id'] . "</td>";
+						echo "<td>" . $searchrow['use_of_item'] . "</td>";
+						echo "<td>" . $searchrow['request_status'] . "</td>";
+						echo "<td>" . $searchrow['date_needed'] . "</td>";
+						echo "<td>";
+						echo "<a href='request_details.php?request_id=" . $searchrow['request_id'] . "'>View Details</a> ";
+						if($searchrow['request_status'] != 'pending'){
+							echo "<a href='status_report.php?request_id=" . $searchrow['request_id'] . "'>View Status Report</a>";
+						}
+						
+						echo "</td></tr>";
 					}
-					
-					echo "</td></tr>";
-				}
-           	}else{
-				while($row = mysqli_fetch_array($requestQuery)){
-					echo "<tr><td> RF 00" . $row['request_id'] . "</td>";
-					echo "<td>" . $row['use_of_item'] . "</td>";
-					echo "<td>" . $row['request_status'] . "</td>";
-					echo "<td>" . $row['date_needed'] . "</td>";
-					echo "<td>";
-					echo "<a href='request_details.php?request_id=" . $row['request_id'] . "'>View Details</a> ";
-					if($row['request_status'] != 'pending'){
-						echo "<a href='status_report.php?request_id=" . $row['request_id'] . "'>View Status Report</a>";
-					}
+	           	}else{
+					while($row = mysqli_fetch_array($requestQuery)){
+						echo "<tr><td> RF 00" . $row['request_id'] . "</td>";
+						echo "<td>" . $row['use_of_item'] . "</td>";
+						echo "<td>" . $row['request_status'] . "</td>";
+						echo "<td>" . $row['date_needed'] . "</td>";
+						echo "<td>";
+						echo "<a href='request_details.php?request_id=" . $row['request_id'] . "'>View Details</a> ";
+						if($row['request_status'] != 'pending'){
+							echo "<a href='status_report.php?request_id=" . $row['request_id'] . "'>View Status Report</a>";
+						}
 
-					echo "</td></tr>";
+						echo "</td></tr>";
+					}
+				}
+			} else {
+				if (isset($_POST['sub_search'])) {
+					$request_search = "SELECT * from request_form where (request_id like '%".$search. "%' or use_of_item like '%".$search. "%') and request_status = 'pending'";
+					$request_searchQ = mysqli_query($conn,$request_search) or die(mysqli_error($conn));
+	            	while($searchrow = mysqli_fetch_array($request_searchQ)){
+						echo "<tr><td> RF 00" . $searchrow['request_id'] . "</td>";
+						echo "<td>" . $searchrow['use_of_item'] . "</td>";
+						echo "<td>" . $searchrow['request_status'] . "</td>";
+						echo "<td>" . $searchrow['date_needed'] . "</td>";
+						echo "<td>";
+						echo "<a href='request_details.php?request_id=" . $searchrow['request_id'] . "'>View Details</a> ";
+						if($searchrow['request_status'] != 'pending'){
+							echo "<a href='status_report.php?request_id=" . $searchrow['request_id'] . "'>View Status Report</a>";
+						}
+						
+						echo "</td></tr>";
+					}
+	           	}else{
+					while($row = mysqli_fetch_array($requestQuery)){
+						echo "<tr><td> RF 00" . $row['request_id'] . "</td>";
+						echo "<td>" . $row['use_of_item'] . "</td>";
+						echo "<td>" . $row['request_status'] . "</td>";
+						echo "<td>" . $row['date_needed'] . "</td>";
+						echo "<td>";
+						echo "<a href='request_details.php?request_id=" . $row['request_id'] . "'>View Details</a> ";
+						if($row['request_status'] != 'pending'){
+							echo "<a href='status_report.php?request_id=" . $row['request_id'] . "'>View Status Report</a>";
+						}
+
+						echo "</td></tr>";
+					}
 				}
 			}	
+
 			?>
 			</table>
 			

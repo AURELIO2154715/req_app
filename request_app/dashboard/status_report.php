@@ -24,11 +24,7 @@ $stat = mysqli_fetch_array($status_report_query, MYSQLI_ASSOC);
 		<p><?php echo $stat['remarks'];?></p>
 		<?php
 		if($stat['request_status'] == 'approved'){
-			if($stat['filename']=='NULL'){
-				echo "<p> No Document Uploaded </p>";
-			}else{
 			echo "<a href='download_doc.php?file=" . $stat['filename'] ."'>Download document</a>";
-		}
 		}
 		?>
 

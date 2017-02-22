@@ -12,6 +12,6 @@ if(!$fileDirectory){ // file does not exist
     header("Content-Transfer-Encoding: binary");
 
     // read the file from disk
-    readfile($fileDirectory);
+    readfile($file);
 }
 ?>
