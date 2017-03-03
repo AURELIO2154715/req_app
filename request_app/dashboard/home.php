@@ -45,7 +45,8 @@ $requestQuery = mysqli_query($conn,$requests) or die(mysqli_error($conn));
  			echo "<a href='request_form.php'>Add New Request</a>";
 
  		}else{
- 			echo "<a href='../accounting/approved.php'> Approved Requests </a>";
+ 			echo "<a href='../accounting/approved.php'> Approved Requests </a><br>";
+ 			echo "<a href='../accounting/rejected.php'> Rejected Requests </a>";
  		}
 
  		?>

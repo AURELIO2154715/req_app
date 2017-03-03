@@ -2,7 +2,7 @@
 include '../shared/connection.php';
 include '../shared/session.php';
 
-$tableStr = "SELECT * FROM request_form INNER JOIN user_details ON (request_form.requested_by=user_details.id) WHERE request_status='approved'";
+$tableStr = "SELECT * FROM request_form INNER JOIN user_details ON (request_form.requested_by=user_details.id) WHERE request_status='rejected'";
 $tableQry = mysqli_query($conn,$tableStr) or die(mysqli_error($conn));
 ?>
 
@@ -13,7 +13,7 @@ $tableQry = mysqli_query($conn,$tableStr) or die(mysqli_error($conn));
 </head>
 <body>
 	<div>
-		<h1 style='text-align: center;'> Approved request </h1>
+		<h1 style='text-align: center;'> Rejected request </h1>
 		<a href="../shared/logout.php" style="float:right">Logout</a>
 		<a href="../dashboard/home.php">Back to List</a>	
 	</div>
