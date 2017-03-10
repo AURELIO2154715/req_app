@@ -32,6 +32,9 @@ $tableQry = mysqli_query($conn,$tableStr) or die(mysqli_error($conn));
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
         </ul>
+        <?php
+        echo "<a href='../dashboard/profile.php' class='nav-link'>" . $firstname . ' ' . $middlename . ' ' . $lastname . "</a>";
+        ?>
           <a href="../shared/logout.php" class='nav-link' >Logout</a>
       </div>
     </nav>

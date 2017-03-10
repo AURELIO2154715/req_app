@@ -55,11 +55,9 @@ $itemsQuery = mysqli_query($conn,$items);
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
         </ul>
-        <div class = "name">
         <?php
-        echo $firstname . ' ' . $middlename . ' ' . $lastname
+        echo "<a href='../dashboard/profile.php' class='nav-link'>" . $firstname . ' ' . $middlename . ' ' . $lastname . "</a>";
         ?>
-        </div>
           <a href="../shared/logout.php" class='nav-link' >Logout</a>
       </div>
     </nav>

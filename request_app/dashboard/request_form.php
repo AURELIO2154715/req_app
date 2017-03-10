@@ -7,6 +7,17 @@ if (isset($_POST['search'])) {
     $search = $_POST['search'];
 	}
 
+	$details = "SELECT firstname,middlename,lastname from user_details where user_id = '$user_id'";
+$detailsQuery = mysqli_query($conn,$details);
+if($detailsQuery){
+	$row = mysqli_fetch_array($detailsQuery,MYSQLI_ASSOC);
+	$firstname = $row['firstname'];
+	$lastname = $row['lastname'];
+	$middlename = $row['middlename'];
+}else{
+	echo "Error: " . $detailsQuery . mysqli_error($conn);
+}
+
 if(isset($_POST['addrequest'])){
 	$user_id = $_SESSION['user_id'];
 	$request_status = 'pending';
@@ -67,6 +78,9 @@ if(isset($_POST['addrequest'])){
         <ul class="navbar-nav mr-auto">
           
         </ul>
+        <?php
+        echo "<a href='../dashboard/profile.php' class='nav-link'>" . $firstname . ' ' . $middlename . ' ' . $lastname . "</a>";
+        ?>
         <a href="../shared/logout.php" class='nav-link' >Logout</a>	
       </div>
     </nav>

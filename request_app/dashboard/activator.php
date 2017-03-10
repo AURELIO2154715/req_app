@@ -8,6 +8,17 @@ if (isset($_POST['search'])) {
     $search = $_POST['search'];
 }
 
+$details = "SELECT firstname,middlename,lastname from user_details where user_id = '$user_id'";
+$detailsQuery = mysqli_query($conn,$details);
+if($detailsQuery){
+    $row = mysqli_fetch_array($detailsQuery,MYSQLI_ASSOC);
+    $firstname = $row['firstname'];
+    $lastname = $row['lastname'];
+    $middlename = $row['middlename'];
+}else{
+    echo "Error: " . $detailsQuery . mysqli_error($conn);
+}
+
 $userAdmin = $_SESSION['user_id'];
 $user_disabled = "SELECT users.id,username,user_type,CONCAT(firstname, ' ', lastname) 'name', users.created_at,user_status FROM users INNER JOIN user_details ON users.id=user_id WHERE user_id!=1";
 $user_disabledQ = mysqli_query($conn,$user_disabled) or die(mysqli_error($conn)); 
@@ -35,6 +46,9 @@ $user_disabledQ = mysqli_query($conn,$user_disabled) or die(mysqli_error($conn))
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
         </ul>
+        <?php
+        echo "<a href='../dashboard/profile.php' class='nav-link'>" . $firstname . ' ' . $middlename . ' ' . $lastname . "</a>";
+        ?>
           <a href="../shared/logout.php" class='nav-link' >Logout</a>
       </div>
     </nav>
