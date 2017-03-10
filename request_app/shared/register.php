@@ -2,8 +2,21 @@
 <html>
 <head>
 	<title>Register</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" href="../styles/styles.css" rel="stylesheet" media="all" />
+    <title>Request App</title>
+    <script src="../styles/stylesJS.js"></script>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
+
+
+                        
+      
+
+
 <?php
 	if (isset($_POST['username'])){
 	include 'connection.php';
@@ -52,27 +65,42 @@
 	}
 
 ?>
+
 	<div>
 		<?php
 		if(isset($_GET['error']) && $_GET['error'] == 'usernameTaken'){
 			echo "Username Already Taken";
 		}
 		?>
-		<form method="POST" action="register.php">
-			Username: <input type="text" name="username"><br>
-			Password: <input type="password" name="password"><br>
-            Confirm Password: <input type="password" name="cpassword"><br>
+		<div class="container">
+        <div class="row" id="pwd-container">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <section class="login-form">
+
+		<form method="POST" action="register.php" role="register">
+			 <input type="text" name="username" placeholder="Username" required class="form-control input-lg" /><br>
+			 <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" /><br>
+			<div class="pwstrength_viewport_progress"></div>
+            <input  type="password" name="cpassword" class="form-control input-lg" id="password" placeholder="Confirm Password"/><br>
 			User Type:
 			<select name="user_type">
 				<option value="scis">SCIS</option>	
 				<option value="accounting">Accounting</option>	
 			</select><br>
-			First Name: <input type="text" name="firstname"><br>
-			Middle Name: <input type="text" name="middlename"><br>
-			Last Name: <input type="text" name="lastname"><br>
+			<input type="text" name="firstname" placeholder="First Name" required class="form-control input-lg"><br>
+			<input type="text" name="middlename" placeholder="Middle Name" required class="form-control input-lg"><br>
+			<input type="text" name="lastname"  placeholder="Last Name" required class="form-control input-lg"><br>
 			<input type="submit" name="register" value="Register">
 		</form>
+         </section>
+
+            </div>
+            <div class="col-md-4"></div>
 		<a href="../index.php">Back</a>	
 	</div>
+	 </div>
+    </div>
+</div>
 </body>
 </html>

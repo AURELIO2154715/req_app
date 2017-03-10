@@ -1,6 +1,12 @@
 <?php
 include '../shared/session.php';
 include '../shared/connection.php';
+$user_id = $_SESSION['user_id'];
+$user_type = $_SESSION['user_type'];
+if (isset($_POST['search'])) {
+    $search = $_POST['search'];
+	}
+
 if(isset($_POST['addrequest'])){
 	$user_id = $_SESSION['user_id'];
 	$request_status = 'pending';
@@ -37,18 +43,76 @@ if(isset($_POST['addrequest'])){
 	}
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Request Form</title>
-</head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../assets/css/main.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../assets/css/dashboard.css" rel="stylesheet">
+	</head>
 <body>
-	<a href="../shared/logout.php" style="float:right">Logout</a>
-	<div>
+	<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+      <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#" >SCIS REQUISITION SYSTEM</a>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          
+        </ul>
+        <a href="../shared/logout.php" class='nav-link' >Logout</a>	
+      </div>
+    </nav>
+
+
+<div class="container-fluid">
+      <div class="row">
+        <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+          <ul class="nav nav-pills flex-column">
+          	<li class="nav-item">
+              <a href="home.php" class='nav-link'>Home </a>
+            </li>
+           <li class="nav-item">
+            <?php
+        if($user_type=='scis'){
+            echo "<a href='request_form.php' class='nav-link active'>Add New Request<span class='sr-only'>(current)</span></a>";
+
+        }else{
+            echo "<a href='../accounting/approved.php' class='nav-link'> Approved Requests </a>";
+            echo "<a href='../accounting/rejected.php' class='nav-link'> Rejected Requests </a>";
+        }
+
+        ?>
+            <li class="nav-item">
+            <?php
+            if($user_id == 1){
+                   echo "<a href='activator.php' class='nav-link'>Manage Accounts</a>";
+                }
+            ?>
+            </li>
+          
+          	<li class="nav-item">
+              <a href="../dashboard/profile.php" class='nav-link' >Profile</a>
+            </li>
+
+            
+          </ul>
+          </nav>
+   
+
+	<div class = "req_form">
 		<h1>Request Form</h1>
-		<a href="home.php">Back to Home</a>
 		<form method="POST" action="request_form.php">
-			<table border="1">
+			<div class="container">
+    		<div class="row col-md-6 col-md-offset-2 custyle">
+			<table class="table table-striped custab">
 				<thead>
 					<tr>
 				    	<th>Quantity</th>
@@ -60,16 +124,19 @@ if(isset($_POST['addrequest'])){
 				  	<tr>
 				  		<td><input type="text" name="quantity[]"></td>
 				  		<td><input type="text" name="item[]"></td>
-				  		<td><button type="button" onclick="event.srcElement.parentElement.parentElement.remove()" class="remove">X</button></td>
+				  		<td><button type="button" onclick="event.srcElement.parentElement.parentElement.remove()" class="remove">Delete</button></td>
 				  	</tr>
 			  	</tbody>
 			</table>
-			<button type="button" class="addItem" onclick="addItem()">Add another Item</button><br>
-			Use of Item: <br><textarea name="reason" rows="4" cols="50"></textarea><br>
-			Date needed: <input type="date" name="date_needed"><br>
+			<button type="button" class="addItem" onclick="addItem()">Add another Item</button>			
+			<p id="para">Use of Item:</p> <br><textarea name="reason" rows="4" cols="50" id="use"></textarea><br>
+			<p id="para">Date needed: </p><input type="date" name="date_needed "><br>
 			<input type="submit" name="addrequest" value="Submit Request">
 		</form>
+		</div>
+		</div>
 	</div>
+
 </body>
 <script type="text/javascript">
 (function() {
@@ -88,7 +155,7 @@ function addItem(){
 	item.setAttribute('name', 'item[]');
 
 	var removeBtn = document.createElement('button');
-	var textnode = document.createTextNode('X');
+	var textnode = document.createTextNode('Delete');
 	removeBtn.appendChild(textnode);
 	removeBtn.setAttribute('type','button');
 	removeBtn.setAttribute('onclick','event.srcElement.parentElement.parentElement.remove()');
@@ -114,4 +181,10 @@ function addItem(){
 }
 
 </script>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="../assets/js/boostrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../assets/js/viewport.js"></script>
 </html>

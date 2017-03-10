@@ -82,9 +82,63 @@ if(isset($_POST['goBtn'])){
 <html>
 <head>
 	<title>Request Form Status</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/main.css" rel="stylesheet">
+    <link href="../assets/css/dashboard.css" rel="stylesheet">
 </head>
 <body>
-	<div>
+	<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+      <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggleroggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#" >SCIS REQUISITION SYSTEM</a>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+          <a href="../shared/logout.php" class='nav-link' >Logout</a>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a href="home.php" class='nav-link'>Home </a>
+            </li>
+    <li class="nav-item">
+            <?php
+        if($user_type=='scis'){
+            echo "<a href='request_form.php' class='nav-link'>Add New Request</a>";
+
+        }else{
+            echo "<a href='../accounting/approved.php' class='nav-link'> Approved Requests </a>";
+            echo "<a href='../accounting/rejected.php' class='nav-link active'> Rejected Requests <span class='sr-only'>(current)</span></a>";
+        }
+
+        ?>
+
+         <li class="nav-item">
+        <?php
+                if($user_id == 1){
+                    echo "<a href='activator.php' class='nav-link active'>Manage Accounts<span class='sr-only'>(current)</span></a>";
+                }
+            ?>
+            </li>          
+            <li class="nav-item">
+              <a href="../dashboard/profile.php" class='nav-link' >Profile</a>
+            </li>
+
+            
+          </ul>
+          </nav>
+</div>
+</div>
+
+	<div class="req_form">
 		<a href="../dashboard/request_details.php?request_id=<?php echo $request_id?>">Back to Request Form Details</a>
 		<h1>
 			<?php if($form_status == 'approve'){
