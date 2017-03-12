@@ -9,7 +9,20 @@ if (isset($_POST['search'])) {
 
 $tableStr = "SELECT * FROM request_form INNER JOIN user_details ON (request_form.requested_by=user_details.id) WHERE request_status='approved'";
 $tableQry = mysqli_query($conn,$tableStr) or die(mysqli_error($conn));
+
+$details = "SELECT firstname,middlename,lastname from user_details where user_id = '$user_id'";
+$detailsQuery = mysqli_query($conn,$details);
+if($detailsQuery){
+  $row = mysqli_fetch_array($detailsQuery,MYSQLI_ASSOC);
+  $firstname = $row['firstname'];
+  $lastname = $row['lastname'];
+  $middlename = $row['middlename'];
+}else{
+  echo "Error: " . $detailsQuery . mysqli_error($conn);
+}
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -31,6 +44,9 @@ $tableQry = mysqli_query($conn,$tableStr) or die(mysqli_error($conn));
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
         </ul>
+        <?php
+        echo "<a href='../dashboard/profile.php' class='nav-link'>" . $firstname . ' ' . $middlename . ' ' . $lastname . "</a>";
+        ?>
         <a href="../shared/logout.php" class='nav-link' >Logout</a>
       </div>
     </nav>

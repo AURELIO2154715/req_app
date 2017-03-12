@@ -39,13 +39,15 @@ $requestQuery = mysqli_query($conn,$requests) or die(mysqli_error($conn));
 
     <!-- Custom styles for this template -->
     <link href="../assets/css/dashboard.css" rel="stylesheet">
+
+  
 </head>
-<body>
+<body>	
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
       <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggleroggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#" >SCIS REQUISITION SYSTEM</a>
+      <a class="navbar-brand" href="home.php" >SCIS REQUISITION SYSTEM</a>
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
@@ -118,7 +120,7 @@ $requestQuery = mysqli_query($conn,$requests) or die(mysqli_error($conn));
 			    <th>Date Needed</th>
 			    <th>Action</th>
 			  </tr>
-
+<div class="btn-group" role="group" aria-label="...">
 			<?php
 			if($user_type == "scis"){
 
@@ -131,7 +133,7 @@ $requestQuery = mysqli_query($conn,$requests) or die(mysqli_error($conn));
 						echo "<td>" . $searchrow['request_status'] . "</td>";
 						echo "<td>" . $searchrow['date_needed'] . "</td>";
 						echo "<td>";
-						echo "<a href='request_details.php?request_id=" . $searchrow['request_id'] . "' class='btn btn-info' role='button'>View Details</a> ";
+						echo "<a href='request_details.php?request_id=" . $searchrow['request_id'] . "' class='btn btn-default' >View Details</a> ";
 						if($searchrow['request_status'] != 'pending'){
 							echo "<a href='status_report.php?request_id=" . $searchrow['request_id'] . "'>View Status Report</a>";
 						}
@@ -224,11 +226,14 @@ $requestQuery = mysqli_query($conn,$requests) or die(mysqli_error($conn));
 			}	
 
 			?>
+			</div>
 			</table>
 			
  		</div> 		
  	</div>
  </div>
+
+
 </body>
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>

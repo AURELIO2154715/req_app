@@ -31,6 +31,7 @@
     <link href="../assets/css/main.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../assets/css/dashboard.css" rel="stylesheet">
+
     </head>
     <body>
     <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
@@ -87,7 +88,7 @@
   
         <div class="req_form">
         <h1>Profile</h1>
-        <a href="../dashboard/change_password.php">Change Password</a>
+        <a href="../dashboard/change_password.php" data-toggle="modal" data-target="#squarespaceModal">Change Password</a>
         <br>
         <?php
             $user = mysqli_fetch_array($user_infoQ);
