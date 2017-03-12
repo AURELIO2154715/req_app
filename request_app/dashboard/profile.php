@@ -98,40 +98,46 @@
             echo "<b>First Name: </b>" . $user['firstname'] . "<br>";
             echo "<b>Middle Name: </b>" . $user['middlename'] . "<br>";
             echo "<b>Last Name: </b>" . $user['lastname'] . "<br>";
+
             ?>
+
         <br>
             <?php    
-            if ($user['user_type'] == "scis"){
-                echo "<h5>Requested Items</h5>";
-                echo "<table class='table table-striped'>";
-                echo"<tr><th>Request No.</th>";
-                echo "<th>Request Description</th>";
-                echo "<th>Status</th>";
-                echo "<th>Date Needed</th>";
-                echo "<th>Action</th></tr>" ;  
+            if(mysqli_num_rows($requestQuery)==0){
+                echo "<p style='background-color:grey;'> You did not request anything :) </p>";
+            }else{
+                if ($user['user_type'] == "scis"){
+                    echo "<h5>Requested Items</h5>";
+                    echo "<table class='table table-striped'>";
+                    echo"<tr><th>Request No.</th>";
+                    echo "<th>Request Description</th>";
+                    echo "<th>Status</th>";
+                    echo "<th>Date Needed</th>";
+                    echo "<th>Action</th></tr>" ;  
 
-                while ($log = mysqli_fetch_array($requestQuery)) {
-                    echo "<tr><td> RF 00" . $log['request_id'] . "</td>";
-                    echo "<td>" . $log['use_of_item'] . "</td>";
-                    echo "<td>" . $log['request_status'] . "</td>";
-                    echo "<td>" . $log['date_needed'] . "</td>";
-                    echo "<td><a href='request_details.php?request_id=" . $log['request_id'] . "'>View Details</a></td></tr>"; 
-                }
-                
-            } else {
-                // echo "<h2>Request Log</h2>" . "<table style='width:50%' border='1'>";
-                // echo"<tr><th>Request No.</th>";
-                // echo "<th>Use for</th>" ;
-                // echo "<th>Status</th>";
-                // echo "<th>Date Needed</th>";
-                // echo "<th>Action</th></tr>";
-               
-                while ($log = mysqli_fetch_array($request_accountingQuery)){
-                    echo "<tr><td> RF 00" . $log['request_id'] . "</td>";
-                    echo "<td>" . $log['use_of_item'] . "</td>";
-                    echo "<td>" . $log['request_status'] . "</td>";
-                    echo "<td>" . $log['date_needed'] . "</td>";
-                    echo "<td><a href='request_details.php?request_id=" . $log['request_id'] . "'>View Details</a></td></tr>"; 
+                    while ($log = mysqli_fetch_array($requestQuery)) {
+                        echo "<tr><td> RF 00" . $log['request_id'] . "</td>";
+                        echo "<td>" . $log['use_of_item'] . "</td>";
+                        echo "<td>" . $log['request_status'] . "</td>";
+                        echo "<td>" . $log['date_needed'] . "</td>";
+                        echo "<td><a href='request_details.php?request_id=" . $log['request_id'] . "'>View Details</a></td></tr>"; 
+                    }
+                    
+                } else {
+                    // echo "<h2>Request Log</h2>" . "<table style='width:50%' border='1'>";
+                    // echo"<tr><th>Request No.</th>";
+                    // echo "<th>Use for</th>" ;
+                    // echo "<th>Status</th>";
+                    // echo "<th>Date Needed</th>";
+                    // echo "<th>Action</th></tr>";
+                   
+                    while ($log = mysqli_fetch_array($request_accountingQuery)){
+                        echo "<tr><td> RF 00" . $log['request_id'] . "</td>";
+                        echo "<td>" . $log['use_of_item'] . "</td>";
+                        echo "<td>" . $log['request_status'] . "</td>";
+                        echo "<td>" . $log['date_needed'] . "</td>";
+                        echo "<td><a href='request_details.php?request_id=" . $log['request_id'] . "'>View Details</a></td></tr>"; 
+                    }
                 }
             }
         ?>
