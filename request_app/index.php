@@ -61,19 +61,6 @@ include 'shared/auth.php';
         $lastname = $_POST['lastname'];
         $status = 'disabled';
 
-        //check if username exist
-        $check = "SELECT username FROM users WHERE username = '$username'";
-        $checkQuery = mysqli_query($conn,$check);
-        if($checkQuery){
-            $result = mysqli_num_rows($checkQuery);
-            if($result > 0){
-                //already exist
-                header("Location: register.php?error=usernameTaken");
-                die();
-            }
-        }else{
-            echo "Error: " . $check . mysqli_error($conn);
-        }
 
         if($password == $cpassword){
             
@@ -92,7 +79,7 @@ include 'shared/auth.php';
             }
             
         }else{
-            echo "Password doesn't match!";
+            echo "<p style='background-color:white'>Wrong Credentials!</p>";
         }
     }
 
