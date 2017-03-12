@@ -80,7 +80,7 @@
 
 		<form method="POST" action="register.php" role="register">
 			 <input type="text" name="username" placeholder="Username" required class="form-control input-lg" /><br>
-			 <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" /><br>
+			 <input type="password" name="password" class="form-control input-lg" id="password" placeholder="Password" required="" /><br>
 			<div class="pwstrength_viewport_progress"></div>
             <input  type="password" name="cpassword" class="form-control input-lg" id="password" placeholder="Confirm Password"/><br>
 			User Type:
