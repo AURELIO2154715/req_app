@@ -107,7 +107,7 @@ include 'shared/auth.php';
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control input-lg" id="password" placeholder="Input Password" required="" >
+                <input type="password" name="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Confirm Password</label>
@@ -144,7 +144,7 @@ include 'shared/auth.php';
                     <button type="button" id="delImage" class="btn btn-default btn-hover-red" data-dismiss="modal"  role="button">Delete</button>
                 </div>
                 <div class="btn-group" role="group">
-                    <button type="button" id="saveImage" class="btn btn-default btn-hover-green" data-action="save" type="submit" name="register">Submit</button>
+                    <button id="saveImage" class="btn btn-default btn-hover-green" data-action="save" type="submit" name="register">Submit</button>
             </form>
                 </div>
             </div>
