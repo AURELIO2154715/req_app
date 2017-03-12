@@ -50,10 +50,10 @@ include 'shared/auth.php';
     <div class="center"><button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary center-block">Click Me</button></div>
     
 <?php
-    if (isset($_POST['username'])){
-    include 'connection.php';
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+    if (isset($_POST['username2'])){
+    include 'shared/connection.php';
+        $username2 = $_POST['username2'];
+        $password2 = $_POST['password2'];
         $cpassword = $_POST['cpassword'];
         $usertype = $_POST['user_type'];
         $firstname = $_POST['firstname'];
@@ -61,16 +61,33 @@ include 'shared/auth.php';
         $lastname = $_POST['lastname'];
         $status = 'disabled';
 
+        //check if username exist
+        $check = "SELECT username FROM users WHERE username = '$username2'";
+        $checkQuery = mysqli_query($conn,$check);
+        if($checkQuery){
+            $result = mysqli_num_rows($checkQuery);
+            if($result > 0){
+                //already exist
+                //register.php --> index.php
+                header("Location: index.php?error=usernameTaken");
+                die();
+  
+            }
+        }else{
+            echo "Error: " . $check . mysqli_error($conn);
+        }
 
-        if($password == $cpassword){
+        if($password2 == $cpassword){
             
-            $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
-            $usersQuery = "INSERT INTO users (username,password,user_type,user_status,created_at,updated_at) VALUES ('$username','$password','$usertype','$status',now(),now())";
+            $password2 = password_hash($_POST['password2'],PASSWORD_DEFAULT);
+            $usersQuery = "INSERT INTO users (username,password,user_type,user_status,created_at,updated_at) VALUES ('$username2','$password2','$usertype','$status',now(),now())";
             if(mysqli_query($conn, $usersQuery)){
                 $user_id = mysqli_insert_id($conn);
                 $userDetailsQuery = "INSERT INTO user_details (user_id,firstname,middlename,lastname,created_at,updated_at) VALUES ($user_id,'$firstname','$middlename','$lastname',now(),now())";
+                    
                 if(mysqli_query($conn,$userDetailsQuery)){
-                    header("location: ../index.php");
+                    header("Location: index.php");
+                    echo "SUCCESSFULLY REGISTERED";
                 }else{
                     echo "Error " . $userDetailsQuery . mysqli_error($conn);
                 }
@@ -78,6 +95,8 @@ include 'shared/auth.php';
                 echo "Error " . $usersQuery . mysqli_error($conn);
             }
             
+        }else{
+            echo "Password doesn't match!";
         }
     }
 
@@ -87,7 +106,7 @@ include 'shared/auth.php';
 <div>
  <?php
         if(isset($_GET['error']) && $_GET['error'] == 'usernameTaken'){
-            echo "Username Already Taken";
+            echo "<p style='background-color: white;'>Username Already Taken</p>";
         }
         ?>   
 <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -100,14 +119,14 @@ include 'shared/auth.php';
         <div class="modal-body">
             
             <!-- content goes here -->
-            <form method="POST" action="register.php" role="register">
+            <form method="POST" action="index.php" role="register">
               <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>
-                <input type="text" name="username" placeholder="JuanDC" required class="form-control input-lg" >
+                <input type="text" name="username2" placeholder="JuanDC" required class="form-control input-lg" >
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" name="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
+                <input type="password" name="password2" class="form-control input-lg" id="password" placeholder="Password" required="" />
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Confirm Password</label>

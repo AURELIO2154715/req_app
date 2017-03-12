@@ -78,7 +78,7 @@
             <div class="col-md-4">
                 <section class="login-form">
 
-		<form method="POST" action="registe 	r.php" role="register">
+		<form method="POST" action="register.php" role="register">
 			 <input type="text" name="username" placeholder="Username" required class="form-control input-lg" /><br>
 			 <input type="password" name="password" class="form-control input-lg" id="password" placeholder="Password" required="" /><br>
 			<div class="pwstrength_viewport_progress"></div>
