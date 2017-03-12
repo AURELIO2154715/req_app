@@ -78,8 +78,6 @@ include 'shared/auth.php';
                 echo "Error " . $usersQuery . mysqli_error($conn);
             }
             
-        }else{
-            echo "<p style='background-color:white'>Wrong Credentials!</p>";
         }
     }
 

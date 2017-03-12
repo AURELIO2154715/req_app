@@ -19,7 +19,7 @@
 					header("Location: dashboard/home.php");
 				}
 			}else{
-				echo "Wrong Credentials, please try again";
+				echo "<p style='background-color:white'>Wrong Credentials, please try again</p>";
 			}
 
 		}else{
