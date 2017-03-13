@@ -76,6 +76,14 @@ include 'shared/auth.php';
         }else{
             echo "Error: " . $check . mysqli_error($conn);
         }
+        //check if username is active or not
+        $checkActive = "SELECT username FROM users WHERE username = '$username2' and user_status= 'disabled'";
+        $checkQueryActive = mysqli_query($conn, $checkActive);
+        if($checkQueryActive){
+            echo "<p style='background-color:grey'> Sorry, Your username is disabled, please consult admin </p>";
+        }else{
+            echo "Error: " . $checkActive . mysqli_error($conn);
+        }
 
         if($password2 == $cpassword){
             

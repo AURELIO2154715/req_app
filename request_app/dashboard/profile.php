@@ -103,7 +103,7 @@
 
         <br>
             <?php    
-            if(mysqli_num_rows($requestQuery)==0){
+            if(mysqli_num_rows($requestQuery)==0 && $user['user_type'] =='scis'){
                 echo "<p style='background-color:grey;'> You did not request anything :) </p>";
             }else{
                 if ($user['user_type'] == "scis"){

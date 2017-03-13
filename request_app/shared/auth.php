@@ -11,15 +11,19 @@
 			if($result > 0){
 				$row = mysqli_fetch_array($query,MYSQLI_ASSOC);	
 				if(password_verify($password,$row['password'])){
-					//store sessions
-					session_start();
-					$_SESSION['user_id'] = $row['id'];
-					$_SESSION['user_type'] = $row['user_type'];
-					//redirect to dashboard
-					header("Location: dashboard/home.php");
+				
+						//store sessions
+						session_start();
+						$_SESSION['user_id'] = $row['id'];
+						$_SESSION['user_type'] = $row['user_type'];
+						//redirect to dashboard
+						header("Location: dashboard/home.php");
+						
+				}else{ //maling password
+					echo "<p style='background-color:white'>Wrong Credentials or disabled account</p>";
 				}
 			}else{
-				echo "<p style='background-color:white'>Wrong Credentials, please try again</p>";
+					echo "<p style='background-color:white'>Wrong Credentials or disabled account</p>";
 			}
 
 		}else{

@@ -88,20 +88,24 @@ if($detailsQuery){
 	<div class="req_form">
 		<h1> Approved request </h1>
 	
-		<table class="table table-striped custab">
-		  <tr>
-		    <th>Request No.</th>
-			<th>Request Description</th> 
-			<th>Status</th>
-			<th>Requested by </th>
-			</tr>
+		  
 		<?php
+    if(mysqli_num_rows($tableQry)==0){
+      echo "<p style='background-color: white';> YOU DID NOT APPROOVE ANY REQUEST :( </p>";
+    }
+      echo "<table class='table table-striped custab'>";
+      echo "<tr>";
+      echo "<th>Request No.</th>";
+      echo "<th>Request Description</th> ";
+      echo "<th>Status</th>";
+      echo "<th>Requested by </th>";
+      echo "</tr>";
 			while($row = mysqli_fetch_array($tableQry)){
 				echo "<tr><td> RF 00" . $row['request_id'] . "</td>";
 			  	echo "<td>" . $row['use_of_item'] . "</td>";
 			  	echo "<td>" . $row['request_status'] . "</td>";
 			  	echo "<td>" . $row['firstname'] . " " . $row['middlename'] . " " . $row['lastname'] . "</td>";
-			  	echo "</tr>";
+			  	echo "</tr></table>";
 			}
 
 		?>
