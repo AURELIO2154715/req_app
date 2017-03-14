@@ -20,13 +20,27 @@ if($detailsQuery){
 }else{
 	echo "Error: " . $detailsQuery . mysqli_error($conn);
 }
+//pagination algo
+$limit = 5;
+$current_page = 1;
+if (isset($_GET['page']) && $_GET['page'] > 0) 
+{
+    $current_page = $_GET['page'];
+}
+$offset = ($current_page * $limit) - $limit;
+
 //request_status
 if($user_type == 'accounting'){
 	$requests = "SELECT * FROM request_form WHERE request_status = 'pending' ORDER BY created_at DESC";
+	$paginator = "SELECT * FROM request_form WHERE request_status = 'pending' ORDER BY created_at DESC LIMIT $offset, $limit";
 }else{
-	$requests = "SELECT * FROM request_form ORDER BY created_at DESC";
+	$requests = "SELECT * FROM request_form  ORDER BY created_at DESC";
+	$paginator = "SELECT * FROM request_form ORDER BY created_at DESC LIMIT $offset,$limit";
 }
 $requestQuery = mysqli_query($conn,$requests) or die(mysqli_error($conn));
+$totalrequest = mysqli_num_rows($requestQuery);
+$paginatorQuery = mysqli_query($conn,$paginator) or die(mysqli_error($conn));
+$pages = ceil($totalrequest/$limit);
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,7 +61,7 @@ $requestQuery = mysqli_query($conn,$requests) or die(mysqli_error($conn));
       <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggleroggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="home.php" >SCIS REQUISITION SYSTEM</a>
+      <a class="navbar-brand" href="../dashboard/home.php" >SCIS REQUISITION SYSTEM</a>
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
@@ -109,23 +123,25 @@ $requestQuery = mysqli_query($conn,$requests) or die(mysqli_error($conn));
             	<input type="submit" name="sub_search" value="Search">
             	Date needed: <input type="date" name="date">
             	<input type="submit" name="date_search" value="Search">
-            	
-            
             </form>
+
  			<table class="table table-striped">
-			  <tr>
-			    <th>Request No.</th>
-			    <th>Request Description</th> 
-			    <th>Status</th>
-			    <th>Date Needed</th>
-			    <th>Action</th>
-			  </tr>
-<div class="btn-group" role="group" aria-label="...">
+              <thead>
+                <tr>
+                  <th>Request #</th>
+                  <th>Description</th>
+                  <th>Status</th>
+                  <th>Date Needed</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+			<div class="btn-group" role="group" aria-label="...">
 			<?php
 			if($user_type == "scis"){
 
 				if (isset($_POST['sub_search'])) {
-					$request_search = "SELECT * from request_form where request_id like '%".$search. "%' or use_of_item like '%".$search. "%' ";
+					$request_search = "SELECT * from request_form where request_id like '%".$search. "%' or use_of_item like '%".$search. "%' or request_status like '%" .$search. "%' ";
 					$request_searchQ = mysqli_query($conn,$request_search) or die(mysqli_error($conn));
 	            	while($searchrow = mysqli_fetch_array($request_searchQ)){
 						echo "<tr><td> RF 00" . $searchrow['request_id'] . "</td>";
@@ -158,19 +174,18 @@ $requestQuery = mysqli_query($conn,$requests) or die(mysqli_error($conn));
 					}
 
 	            }else{
-					while($row = mysqli_fetch_array($requestQuery)){
-						echo "<tr><td> RF 00" . $row['request_id'] . "</td>";
-						echo "<td>" . $row['use_of_item'] . "</td>";
-						echo "<td>" . $row['request_status'] . "</td>";
-						echo "<td>" . $row['date_needed'] . "</td>";
-						echo "<td>";
-						echo "<a href='request_details.php?request_id=" . $row['request_id'] . "'>View Details</a> ";
-						if($row['request_status'] != 'pending'){
-							echo "<a href='status_report.php?request_id=" . $row['request_id'] . "'>View Status Report</a>";
-						}
-
-						echo "</td></tr>";
-					}
+					while($row = mysqli_fetch_array($paginatorQuery)){
+					  	echo "<tr><td> RF 00" . $row['request_id'] . "</td>";
+					  	echo "<td>" . $row['use_of_item'] . "</td>";
+					  	echo "<td>" . $row['request_status'] . "</td>";
+					  	echo "<td>" . $row['date_needed'] . "</td>";
+					  	echo "<td>";
+					  	echo "<a class='btn btn-info' href='request_details.php?request_id=" . $row['request_id'] . "'>View Details</a> ";
+			  		if($row['request_status'] != 'pending'){
+			  			echo "<a class='btn btn-warning' href='status_report.php?request_id=" . $row['request_id'] . "'>View Status Report</a>";
+			  		}
+			  	echo "</td></tr>";
+			  }
 				}
 			} else {
 				if (isset($_POST['sub_search'])) {
@@ -209,25 +224,48 @@ $requestQuery = mysqli_query($conn,$requests) or die(mysqli_error($conn));
 					}
 
 	            }else{
-					while($row = mysqli_fetch_array($requestQuery)){
-						echo "<tr><td> RF 00" . $row['request_id'] . "</td>";
-						echo "<td>" . $row['use_of_item'] . "</td>";
-						echo "<td>" . $row['request_status'] . "</td>";
-						echo "<td>" . $row['date_needed'] . "</td>";
-						echo "<td>";
-						echo "<a href='request_details.php?request_id=" . $row['request_id'] . "'>View Details</a> ";
-						if($row['request_status'] != 'pending'){
-							echo "<a href='status_report.php?request_id=" . $row['request_id'] . "'>View Status Report</a>";
-						}
-
-						echo "</td></tr>";
-					}
+					while($row = mysqli_fetch_array($paginatorQuery)){
+					  	echo "<tr><td> RF 00" . $row['request_id'] . "</td>";
+					  	echo "<td>" . $row['use_of_item'] . "</td>";
+					  	echo "<td>" . $row['request_status'] . "</td>";
+					  	echo "<td>" . $row['date_needed'] . "</td>";
+					  	echo "<td>";
+					  	echo "<a class='btn btn-info' href='request_details.php?request_id=" . $row['request_id'] . "'>View Details</a> ";
+			  		if($row['request_status'] != 'pending'){
+			  			echo "<a class='btn btn-warning' href='status_report.php?request_id=" . $row['request_id'] . "'>View Status Report</a>";
+			  		}
+			  			echo "</td></tr>";
+			 		 }
 				}
 			}	
 
 			?>
 			</div>
+			</tbody>
+			</div>
 			</table>
+			 	<ul class="pagination">
+			 <!--  <li><a href="#">1</a></li>
+			  <li class="active"><a href="#">2</a></li>
+			  <li><a href="#">3</a></li>
+			  <li><a href="#">4</a></li>
+			  <li><a href="#">5</a></li> -->
+			  	<?php
+					if($current_page == 1){
+						echo "<li class='disabled'><a href='javascipt:void(0)'>&laquo;</li>";
+					}else{
+						echo "<li><a href='home.php?page=" .($current_page - 1). "'>&laquo;</a></li>";
+					}
+					for($var = 1; $var <= $pages; $var++){
+						echo "<li><a href='home.php?page=" .$var. "'>" .$var."</a></li>";
+					}
+					if($current_page == $pages){
+						echo "<li class='disabled'><a href='javascipt:void(0)'>&raquo;</a></li>";
+					}else{
+						echo "<li><a href='home.php?page=" .($current_page + 1). "'>&raquo;</a></li>";
+					}
+				?>
+			</ul>
 			
  		</div> 		
  	</div>

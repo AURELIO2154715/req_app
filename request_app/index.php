@@ -38,7 +38,6 @@ include 'shared/auth.php';
                         <div class="pwstrength_viewport_progress"></div>
                         <button type="submit" name="login" class="btn btn-lg btn-primary btn-block" value ="Login">Sign in</button>
                         <div> <a data-toggle="modal" data-target="#squarespaceModal" class="btn btn-lg btn-primary btn-block">Create account</a></div>
-                        <a href="shared/register.php">Register.php</a>
                      </form>
                 </section>
             </div>
@@ -47,7 +46,6 @@ include 'shared/auth.php';
     </div>
 
 
-    <div class="center"><button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary center-block">Click Me</button></div>
     
 <?php
     if (isset($_POST['username2'])){
@@ -76,14 +74,14 @@ include 'shared/auth.php';
         }else{
             echo "Error: " . $check . mysqli_error($conn);
         }
-        //check if username is active or not
-        $checkActive = "SELECT username FROM users WHERE username = '$username2' and user_status= 'disabled'";
-        $checkQueryActive = mysqli_query($conn, $checkActive);
-        if($checkQueryActive){
-            echo "<p style='background-color:grey'> Sorry, Your username is disabled, please consult admin </p>";
-        }else{
-            echo "Error: " . $checkActive . mysqli_error($conn);
-        }
+        // //check if username is active or not
+        // $checkActive = "SELECT username FROM users WHERE username = '$username2' and user_status= 'disabled'";
+        // $checkQueryActive = mysqli_query($conn, $checkActive);
+        // if($checkQueryActive){
+        //     echo "<p style='background-color:grey'> Sorry, Your username is disabled, please consult admin </p>";
+        // }else{
+        //     echo "Error: " . $checkActive . mysqli_error($conn);
+        // }
 
         if($password2 == $cpassword){
             

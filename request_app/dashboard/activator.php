@@ -41,7 +41,7 @@ $user_disabledQ = mysqli_query($conn,$user_disabled) or die(mysqli_error($conn))
       <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggleroggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="home.php" >SCIS REQUISITION SYSTEM</a>
+      <a class="navbar-brand" href="../dashboard/home.php" >SCIS REQUISITION SYSTEM</a>
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">

@@ -101,6 +101,10 @@
                 $updatepass = "UPDATE users SET password = '$newpass' where id = '$user_id'";
                 $upadatepassQ = mysqli_query($conn, $updatepass);
                 echo "success";
+                session_unset();
+                session_destroy();
+                header("Location: ../index.php");
+                exit;
 
             } else {
                 echo "Password DOESN'T match!";
