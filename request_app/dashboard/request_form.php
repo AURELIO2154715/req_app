@@ -81,7 +81,9 @@ if(isset($_POST['addrequest'])){
         <?php
         echo "<a href='../dashboard/profile.php' class='nav-link'>" . $firstname . ' ' . $middlename . ' ' . $lastname . "</a>";
         ?>
-        <a href="../shared/logout.php" class='nav-link' >Logout</a>	
+       <div class="btn-group" role="group" aria-label="...">
+        <a href="../shared/logout.php" class='btn btn-primary' >Logout</a>
+        </div>
       </div>
     </nav>
 

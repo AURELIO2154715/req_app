@@ -48,10 +48,7 @@ $pages = ceil($totalrequest/$limit);
 	<title>Home</title>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- Bootstrap core CSS -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="../assets/css/dashboard.css" rel="stylesheet">
 
   
@@ -70,7 +67,9 @@ $pages = ceil($totalrequest/$limit);
         <?php
         echo "<a href='../dashboard/profile.php' class='nav-link'>" . $firstname . ' ' . $middlename . ' ' . $lastname . "</a>";
         ?>
-        <a href="../shared/logout.php" class='nav-link' >Logout</a>
+        <div class="btn-group" role="group" aria-label="...">
+        <a href="../shared/logout.php" class='btn btn-primary' >Logout</a>
+    	</div>
       </div>
     </nav>
 
@@ -120,9 +119,11 @@ $pages = ceil($totalrequest/$limit);
  			<h2>Requested Items</h2>
  			<form method="POST" action="home.php">
             	Search: <input type="text" name="search">
-            	<input type="submit" name="sub_search" value="Search">
+            	<div class="btn-group" role="group" aria-label="...">
+            	<input class='btn btn-info' type="submit" name="sub_search" value="Search">
             	Date needed: <input type="date" name="date">
-            	<input type="submit" name="date_search" value="Search">
+            	<input class='btn btn-info' type="submit" name="date_search" value="Search">
+            	</div>
             </form>
 
  			<table class="table table-striped">
@@ -270,6 +271,7 @@ $pages = ceil($totalrequest/$limit);
  		</div> 		
  	</div>
  </div>
+</div>
 
 
 </body>

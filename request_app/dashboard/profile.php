@@ -44,7 +44,9 @@
         <ul class="navbar-nav mr-auto">
           
         </ul>
-        <a href="../shared/logout.php" class='nav-link' >Logout</a>
+        <div class="btn-group" role="group" aria-label="...">
+        <a href="../shared/logout.php" class='btn btn-danger' >Logout</a>
+        </div>
       </div>
     </nav>
 
