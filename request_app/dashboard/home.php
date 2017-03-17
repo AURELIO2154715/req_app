@@ -68,7 +68,7 @@ $pages = ceil($totalrequest/$limit);
         echo "<a href='../dashboard/profile.php' class='nav-link'>" . $firstname . ' ' . $middlename . ' ' . $lastname . "</a>";
         ?>
         <div class="btn-group" role="group" aria-label="...">
-        <a href="../shared/logout.php" class='btn btn-primary' >Logout</a>
+        <a href="../shared/logout.php" class='btn btn-danger' >Logout</a>
     	</div>
       </div>
     </nav>
@@ -78,7 +78,7 @@ $pages = ceil($totalrequest/$limit);
         <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
           <ul class="nav nav-pills flex-column">
           	<li class="nav-item">
-              <a class="nav-link active" href="home.php">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link active" id="navlinkact" href="home.php">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
             <?php
