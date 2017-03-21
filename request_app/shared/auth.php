@@ -20,29 +20,16 @@
 						header("Location: dashboard/home.php");
 						
 				}else{ //maling password
-					echo "<p style='background-color:white'>Wrong Credentials or disabled account</p>";
+					echo "<script> alert('Wrong password!') </script>";
 				}
 			}else{
-					echo "<p style='background-color:white'>Wrong Credentials or disabled account</p>";
+					echo "<script> alert('Username disabled, Please contact the administrator!') </script>";
 			}
 
 		}else{
 			$result = 0;
 		}
 		
-		
-		// if($result == 1){
-		// header("location: dashboard.php");
-		// $_SESSION['gwenn'] = true;
-		// }else{
-		// 	echo"Invalid Credentials!";
-		// }
-		
-		// if($username == "admin" && $password == "admin"){
-		// header("location: try.php");
-		// $_SESSION['gwenn'] = true;
-		
-		// }
 	
 	}
 ?>

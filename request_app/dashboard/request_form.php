@@ -8,7 +8,7 @@ if (isset($_POST['search'])) {
 	}
 
 	$details = "SELECT firstname,middlename,lastname from user_details where user_id = '$user_id'";
-$detailsQuery = mysqli_query($conn,$details);
+	$detailsQuery = mysqli_query($conn,$details);
 if($detailsQuery){
 	$row = mysqli_fetch_array($detailsQuery,MYSQLI_ASSOC);
 	$firstname = $row['firstname'];
@@ -82,7 +82,7 @@ if(isset($_POST['addrequest'])){
         echo "<a href='../dashboard/profile.php' class='nav-link'>" . $firstname . ' ' . $middlename . ' ' . $lastname . "</a>";
         ?>
        <div class="btn-group" role="group" aria-label="...">
-        <a href="../shared/logout.php" class='btn btn-danger' >Logout</a>
+        <a href="../shared/logout.php" class='btn btn-primary' >Logout</a>
         </div>
       </div>
     </nav>
@@ -146,7 +146,7 @@ if(isset($_POST['addrequest'])){
 			</table>
 			<button type="button" class="addItem" onclick="addItem()">Add another Item</button>			
 			<p id="para">Use of Item:</p> <br><textarea name="reason" rows="4" cols="50" id="use"></textarea><br>
-			<p id="para">Date needed: </p> <input type="date" name="date_needed "> </div> <br>
+			<p id="para">Date needed: </p> <input type="date" name="date_needed99"> </div> <br>
 			<input type="submit" name="addrequest" value="Submit Request">
 		</form>
 		</div>

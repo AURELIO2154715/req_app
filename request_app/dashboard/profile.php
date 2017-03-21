@@ -17,18 +17,6 @@
             $requestQuery = mysqli_query($conn,$requests) or die(mysqli_error($conn));
                
             $user_infoQ = mysqli_query($conn,$user_info) or die(mysqli_error($conn)); 
-
-            //name 
-$details = "SELECT firstname,middlename,lastname from user_details where user_id = '$user_id'";
-$detailsQuery = mysqli_query($conn,$details);
-if($detailsQuery){
-    $row = mysqli_fetch_array($detailsQuery,MYSQLI_ASSOC);
-    $firstname = $row['firstname'];
-    $lastname = $row['lastname'];
-    $middlename = $row['middlename'];
-}else{
-    echo "Error: " . $detailsQuery . mysqli_error($conn);
-}
         
         ?>
 
@@ -43,7 +31,6 @@ if($detailsQuery){
     <link href="../assets/css/main.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../assets/css/dashboard.css" rel="stylesheet">
-
 
     </head>
     <body>
@@ -103,71 +90,27 @@ if($detailsQuery){
   
         <div class="req_form">
         <h1>Profile</h1>
-        <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
-          <div class="panel panel-info">
-            <div class="panel-heading">
-                <?php
-                echo "<h3>" . $firstname . ' ' . $middlename . ' ' . $lastname . "</h3>";
-                ?>
-            </div>
-            <div class="panel-body">
-              <div class="row">
-                <div class=" col-md-9 col-lg-9 "> 
-                  <table class="table table-user-information">
-                    <tbody>
+        <a href="../dashboard/change_password.php" data-toggle="modal" data-target="#squarespaceModal">Change Password</a>
+        <br>
         <?php
             $user = mysqli_fetch_array($user_infoQ);
-            echo "<tr>";
-            echo "<td><b>User ID: </b></td>" ;
-            echo "<td>" . $user['id'];
-            echo"</tr>";
-
-            echo "<tr>";
-            echo "<td><b>Username: </b></td>" ;
-            echo "<td>" . $user['username'];
-            echo"</tr>";
-
-            echo "<tr>";
-            echo "<td><b>User Type: </b></td>" ;
-            echo "<td>" . $user['user_type'];
-            echo"</tr>";
-
-            echo "<tr>";
-            echo "<td><b>First Name </b></td>" ;
-            echo "<td>" . $user['firstname'];
-            echo"</tr>";
-
-            echo "<tr>";
-            echo "<td><b>Middle Name </b></td>" ;
-            echo "<td>" . $user['middlename'];
-            echo"</tr>";
-
-            echo "<tr>";
-            echo "<td><b>Last Name </b></td>" ;
-            echo "<td>" . $user['lastname'];
-            echo"</tr>";
+            echo "<b>User ID: </b>" . $user['id'] . "<br>";
+            echo "<b>Username: </b>" . $user['username'] . "<br>";
+            echo "<b>User Type: </b>" . $user['user_type'] . "<br>";
+            echo "<b>First Name: </b>" . $user['firstname'] . "<br>";
+            echo "<b>Middle Name: </b>" . $user['middlename'] . "<br>";
+            echo "<b>Last Name: </b>" . $user['lastname'] . "<br>";
 
             ?>
-                      
-                     
-                    </tbody>
-                  </table>
-                
-        <a href="../dashboard/change_password.php" data-toggle="modal" data-target="#squarespaceModal">Change Password</a>
-                </div>
-              </div>
-            </div>
 
         <br>
-                    <h5>Requested Items</h5>
-                    <table class='table table-striped'>
             <?php    
             if(mysqli_num_rows($requestQuery)==0 && $user['user_type'] =='scis'){
                 echo "<p style='background-color:grey;'> You did not request anything :) </p>";
             }else{
                 if ($user['user_type'] == "scis"){
+                    echo "<h5>Requested Items</h5>";
+                    echo "<table class='table table-striped'>";
                     echo"<tr><th>Request No.</th>";
                     echo "<th>Request Description</th>";
                     echo "<th>Status</th>";
@@ -179,7 +122,7 @@ if($detailsQuery){
                         echo "<td>" . $log['use_of_item'] . "</td>";
                         echo "<td>" . $log['request_status'] . "</td>";
                         echo "<td>" . $log['date_needed'] . "</td>";
-                        echo "<td><a a class='btn btn-info' href='request_details.php?request_id=" . $log['request_id'] . "'>View Details</a></td></tr>"; 
+                        echo "<td><a href='request_details.php?request_id=" . $log['request_id'] . "'>View Details</a></td></tr>"; 
                     }
                     
                 } else {
@@ -195,12 +138,12 @@ if($detailsQuery){
                         echo "<td>" . $log['use_of_item'] . "</td>";
                         echo "<td>" . $log['request_status'] . "</td>";
                         echo "<td>" . $log['date_needed'] . "</td>";
-                        echo "<td><a a class='btn btn-info' href='request_details.php?request_id=" . $log['request_id'] . "'>View Details</a></td></tr>"; 
+                        echo "<td><a href='request_details.php?request_id=" . $log['request_id'] . "'>View Details</a></td></tr>"; 
                     }
                 }
             }
         ?>
-
+    </table>
        </div>
 </div>
     </div>

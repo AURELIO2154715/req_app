@@ -121,8 +121,8 @@ $itemsQuery = mysqli_query($conn,$items);
 		$statusarr = mysqli_fetch_array($statusQRY, MYSQLI_ASSOC);
 		if($user_type == 'accounting'){
 			echo "<span id='buttons'>";
-	 		echo "<a href='../accounting/request_status.php?request_id=" .$request_id. "&&status=approve'>Approve</a> | ";
-			echo "<a href='../accounting/request_status.php?request_id=" .$request_id. "&&status=reject'>Reject</a>";
+	 		echo "<a class='btn btn-info' href='../accounting/request_status.php?request_id=" .$request_id. "&&status=approve'>Approve</a>";
+			echo "<a class='btn btn-warning' href='../accounting/request_status.php?request_id=" .$request_id. "&&status=reject'>Reject</a>";
 			echo "</span>";
 		}	
 		?>

@@ -105,8 +105,8 @@ if($detailsQuery){
 			  	echo "<td>" . $row['use_of_item'] . "</td>";
 			  	echo "<td>" . $row['request_status'] . "</td>";
 			  	echo "<td>" . $row['firstname'] . " " . $row['middlename'] . " " . $row['lastname'] . "</td>";
-			  	echo "</tr></table>";
 			}
+      echo "</tr></table>";
 
 		?>
 

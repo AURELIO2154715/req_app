@@ -50,7 +50,7 @@ $user_disabledQ = mysqli_query($conn,$user_disabled) or die(mysqli_error($conn))
         echo "<a href='../dashboard/profile.php' class='nav-link'>" . $firstname . ' ' . $middlename . ' ' . $lastname . "</a>";
         ?>
           <div class="btn-group" role="group" aria-label="...">
-        <a href="../shared/logout.php" class='btn btn-danger' >Logout</a>
+        <a href="../shared/logout.php" class='btn btn-primary' >Logout</a>
         </div>
       </div>
     </nav>
@@ -123,8 +123,8 @@ $user_disabledQ = mysqli_query($conn,$user_disabled) or die(mysqli_error($conn))
         echo "<h2> Input Username to Activate/Disable </h2>";
         echo "<form method='POST' action='activator.php'>";
         echo "Username: <input type='text' name='user'>";
-        echo "<input type='submit' class='btn btn-success' name='active' value='Activate'>";
-        echo "<input type='submit'  class='btn btn-danger'name='disabled' value='Disable'>";
+        echo "<input type='submit' name='active' value='Activate'>";
+        echo "<input type='submit' name='disabled' value='Disable'>";
         echo "</form>";
 
         if(isset($_POST['active'])){

@@ -112,7 +112,7 @@ include 'shared/auth.php';
 <div>
  <?php
         if(isset($_GET['error']) && $_GET['error'] == 'usernameTaken'){
-            echo "<p style='background-color: white;'>Username Already Taken</p>";
+            echo "<script> alert('Username Already Taken') </script>";
         }
         ?>   
 <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
