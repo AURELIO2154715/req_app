@@ -8,7 +8,7 @@ if (isset($_POST['search'])) {
 	}
 
 	$details = "SELECT firstname,middlename,lastname from user_details where user_id = '$user_id'";
-	$detailsQuery = mysqli_query($conn,$details);
+$detailsQuery = mysqli_query($conn,$details);
 if($detailsQuery){
 	$row = mysqli_fetch_array($detailsQuery,MYSQLI_ASSOC);
 	$firstname = $row['firstname'];
@@ -98,7 +98,7 @@ if(isset($_POST['addrequest'])){
            <li class="nav-item">
             <?php
         if($user_type=='scis'){
-            echo "<a href='request_form.php' class='nav-link active'>Add New Request<span class='sr-only'>(current)</span></a>";
+            echo "<a href='request_form.php' class='nav-link active' id='navlinkact'>Add New Request<span class='sr-only'>(current)</span></a>";
 
         }else{
             echo "<a href='../accounting/approved.php' class='nav-link'> Approved Requests </a>";
@@ -140,14 +140,15 @@ if(isset($_POST['addrequest'])){
 				  	<tr>
 				  		<td><input type="text" name="quantity[]"></td>
 				  		<td><input type="text" name="item[]"></td>
-				  		<td><button type="button" onclick="event.srcElement.parentElement.parentElement.remove()" class="remove">Delete</button></td>
+				  		<td><button type="button" onclick="event.srcElement.parentElement.parentElement.remove()" class='btn btn-danger' >Delete</button></td>
 				  	</tr>
 			  	</tbody>
 			</table>
-			<button type="button" class="addItem" onclick="addItem()">Add another Item</button>			
-			<p id="para">Use of Item:</p> <br><textarea name="reason" rows="4" cols="50" id="use"></textarea><br>
-			<p id="para">Date needed: </p> <input type="date" name="date_needed99"> </div> <br>
-			<input type="submit" name="addrequest" value="Submit Request">
+			<button type="button" class='btn btn-info' onclick="addItem()">Add another Item</button>	
+
+			<h5 id="para">Use of Item:</h5> <br><textarea name="reason" rows="4" cols="50" id="use"></textarea><br>
+			<h6 id="para">Date needed: </h6> <input type="date" name="date_needed "> </div> <br>
+			<input type="submit" name="addrequest" class='btn btn-primary' value="Submit Request">
 		</form>
 		</div>
 		</div>

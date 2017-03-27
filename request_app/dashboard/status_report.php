@@ -86,6 +86,7 @@ if($detailsQuery){
 <div class="req_form">
 	<div>
 		<h1>Status Report</h1>
+        <a href="../dashboard/home.php" class='nav-link active'>Back </a>
 		<h3>Status</h3> <h5><?php echo $stat['request_status'];?></h5>
 		<br>
 		<h3>Reason</h3>

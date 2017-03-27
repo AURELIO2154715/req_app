@@ -77,7 +77,7 @@ $user_disabledQ = mysqli_query($conn,$user_disabled) or die(mysqli_error($conn))
          <li class="nav-item">
         <?php
                 if($user_id == 1){
-                    echo "<a href='activator.php' class='nav-link active'>Manage Accounts<span class='sr-only'>(current)</span></a>";
+                    echo "<a href='activator.php' class='nav-link active' id='navlinkact'>Manage Accounts<span class='sr-only'>(current)</span></a>";
                 }
             ?>
             </li>          
@@ -123,8 +123,8 @@ $user_disabledQ = mysqli_query($conn,$user_disabled) or die(mysqli_error($conn))
         echo "<h2> Input Username to Activate/Disable </h2>";
         echo "<form method='POST' action='activator.php'>";
         echo "Username: <input type='text' name='user'>";
-        echo "<input type='submit' name='active' value='Activate'>";
-        echo "<input type='submit' name='disabled' value='Disable'>";
+        echo "<input type='submit' class='btn btn-success' name='active' value='Activate'>";
+        echo "<input type='submit'  class='btn btn-danger'name='disabled' value='Disable'>";
         echo "</form>";
 
         if(isset($_POST['active'])){

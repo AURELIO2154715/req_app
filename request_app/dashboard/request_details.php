@@ -67,7 +67,7 @@ $itemsQuery = mysqli_query($conn,$items);
         <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a href="../dashboard/home.php" class='nav-link'>Home </a>
+              <a href="../dashboard/home.php" class='nav-link active'>Home </a>
             </li>
     <li class="nav-item">
             <?php
@@ -89,7 +89,7 @@ $itemsQuery = mysqli_query($conn,$items);
             ?>
             </li>          
             <li class="nav-item">
-              <a href="../dashboard/profile.php" class='nav-link active' >Profile<span class='sr-only'>(current)</span></a>
+              <a href="../dashboard/profile.php" class='nav-link' >Profile<span class='sr-only'>(current)</span></a>
             </li>
 
             
@@ -112,6 +112,7 @@ $itemsQuery = mysqli_query($conn,$items);
 			  }
 		    ?>
 		</table>
+        <a href="../dashboard/home.php" class='nav-link active'>Back </a>
 		<h5>Requested By:</h5><h6> <?php echo $req['firstname'] . " " . $req['middlename'] . " " . $req['lastname'];?></h6>
 		<h5>Use of Item(s):</h5><h6> <?php echo $req['use_of_item'];?></h6>
 		<h5>Needed on:</h5><h6> <?php echo $req['date_needed'];?></h6>
